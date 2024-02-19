@@ -2,12 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+    <title>goit-js-hw-11</title>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <script type="module" src="./main.js"></script>
+    <form class="form">
+      <input
+        type="text"
+        class="text-form"
+        name="query"
+        placeholder="Search images..."
+      />
+      <button type="submit" class="button">Search</button>
+    </form>
+
+    <ul class="gallery"></ul>
+
+    <div class="loader-item"><span class="loader"></span></div>
+
+    <div class="loader-item">
+      <button type="button" class="load_button hidden">Load more</button>
+    </div>
+
+    <script src="./main.js" type="module"></script>
   </body>
 </html>
