@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
-const inputDate = document.querySelector('input');
+const input = document.querySelector('input');
 const loadMoreBtn = document.querySelector('.load_button');
 const loader = document.querySelector('.loader');
 
@@ -21,7 +21,7 @@ loadMoreBtn.addEventListener('click', onLoadMoreItems);
 
 async function onCreateFormSubmit(event) {
   event.preventDefault();
-  searchTerm = inputDate.value.trim();
+  searchTerm = input.value.trim();
   page = 1;
 
   if (!searchTerm) {
@@ -44,13 +44,11 @@ async function onCreateFormSubmit(event) {
     });
   }
 
-  checkBtnVisibleStatus();
   event.target.reset();
 }
 
 async function onLoadMoreItems() {
   page += 1;
-  checkBtnVisibleStatus();
 
   try {
     await fetchImages();
@@ -69,12 +67,11 @@ async function onLoadMoreItems() {
     top: height * 2,
     behavior: 'smooth',
   });
-
-  checkBtnVisibleStatus();
 }
 
 async function fetchImages() {
   showLoader();
+  checkBtnVisibleStatus();
   const apiKey = '42288638-d7f8a30b0a31b090439479823';
   const perPage = 15;
   const url = `https://pixabay.com/api/?key=${apiKey}&q=${searchTerm}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
@@ -132,6 +129,8 @@ async function fetchImages() {
   } catch (error) {
     throw new Error(error.message);
   }
+
+  checkBtnVisibleStatus();
 }
 
 function showLoader() {
@@ -146,13 +145,13 @@ function showLoadBtn() {
   loadMoreBtn.classList.remove('hidden');
 }
 
-function hiddenLoadBtn() {
+function hideLoadBtn() {
   loadMoreBtn.classList.add('hidden');
 }
 
 function checkBtnVisibleStatus() {
   if (page >= maxPage) {
-    hiddenLoadBtn();
+    hideLoadBtn();
   } else {
     showLoadBtn();
   }
